@@ -12,6 +12,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
+    // --- Menu Mobile Toggle ---
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+    }
+
+
     // --- Rolagem Suave para links âncora ---
     const navLinks = document.querySelectorAll('.nav-links a');
 
@@ -19,6 +31,12 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', function(e) {
             // Previne o comportamento padrão do link
             e.preventDefault();
+            
+            // Fecha o menu mobile se estiver aberto
+            if (navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                mobileMenuToggle.classList.remove('active');
+            }
             
             // Pega o ID da seção (ex: '#sobre')
             const targetId = this.getAttribute('href');
